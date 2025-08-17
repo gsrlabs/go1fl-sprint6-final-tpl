@@ -27,7 +27,7 @@ func TextHandler(data string) (string, error) {
 	if isMorse {
 		result := morse.ToText(data)
 		if result == "" {
-			return "", errors.New("некорректный код Морзе: содержит нераспознанные символы")
+			return "", errors.New("incorrect Morse code: contains unrecognized characters")
 		}
 		return result, nil
 	}
@@ -38,7 +38,7 @@ func TextHandler(data string) (string, error) {
 
 	result := morse.ToMorse(data)
 	if result == "" {
-		return "", errors.New("ошибка конвертации в код Морзе")
+		return "", errors.New("error converting to Morse code")
 	}
 	return result, nil
 }
@@ -52,7 +52,7 @@ func isMorseCode(data string) (bool, error) {
 
 	for _, r := range data {
 		if !strings.ContainsRune(ValidMorseChars, r) {
-			return false, errors.New("смешанный ввод: код Морзе содержит недопустимые символы")
+			return false, errors.New("mixed input: Morse code contains invalid characters")
 		}
 	}
 	return true, nil
@@ -62,7 +62,7 @@ func isMorseCode(data string) (bool, error) {
 func validateText(data string) error {
 	for _, r := range data {
 		if r != ' ' && !strings.ContainsRune(ValidSymbols, r) {
-			return errors.New("текст содержит недопустимый символ: " + string(r))
+			return errors.New("the text contains an invalid character: " + string(r))
 		}
 	}
 	return nil
