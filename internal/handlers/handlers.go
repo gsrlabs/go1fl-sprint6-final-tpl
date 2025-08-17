@@ -36,14 +36,16 @@ const (
 
 // HandleMain serves the main HTML page.
 func HandleMain(w http.ResponseWriter, r *http.Request) {
-    data, err := os.ReadFile(filepath.Join("..", "index.html"))
+    // Используйте правильный путь к файлу index.html
+    data, err := os.ReadFile("index.html")
     if err != nil {
         log.Printf(LogErrReadIndex, err)
         http.Error(w, ErrInternalServer, http.StatusInternalServerError)
         return
     }
     
-    w.Header().Set("Content-Type", "text/html")
+    // Явно устанавливаем Content-Type как text/html
+    w.Header().Set("Content-Type", "text/html; charset=utf-8")
     w.Write(data)
 }
 
@@ -75,7 +77,7 @@ func HandleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-    logDir := filepath.Join("..", "logs")
+    logDir := "logs"
     if err := os.MkdirAll(logDir, 0755); err != nil {
         log.Printf(LogErrCreateLogDir, err)
         http.Error(w, ErrCreateLogDir, http.StatusInternalServerError)
