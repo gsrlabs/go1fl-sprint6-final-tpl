@@ -40,7 +40,7 @@ func HandleMain(w http.ResponseWriter, r *http.Request) {
     data, err := os.ReadFile("index.html")
     if err != nil {
         log.Printf(LogErrReadIndex, err)
-        http.Error(w, ErrInternalServer, http.StatusInternalServerError)
+        http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
         return
     }
     
