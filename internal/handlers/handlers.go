@@ -66,7 +66,7 @@ func HandleUpload(w http.ResponseWriter, r *http.Request) {
 
 	fileBytes, err := io.ReadAll(file)
 	if err != nil {
-		http.Error(w, ErrReadFile, http.StatusInternalServerError)
+		http.Error(w, ErrReadFile, http.StatusBadRequest)
 		return
 	}
 
